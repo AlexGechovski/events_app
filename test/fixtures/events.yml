@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  desciption: MyText
+  location: MyText
+  start_date: 2022-11-29 21:35:41
+  end_date: 2022-11-29 21:35:41
+
+two:
+  title: MyString
+  desciption: MyText
+  location: MyText
+  start_date: 2022-11-29 21:35:41
+  end_date: 2022-11-29 21:35:41

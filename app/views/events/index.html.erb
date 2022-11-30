@@ -1,0 +1,31 @@
+<div style="margin-left:5rem">
+  <p style="color: green"><%= notice %></p>
+
+  <h1>Events</h1>
+
+  <div id="events">
+    <% @events.each do |event| %>
+      <div class="card text-bg-secondary mb-3" style="max-width: 20rem;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="..." class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title"><%= event.title %></h5>
+            <p class="card-text"><%= event.location %></p>
+            <p class="card-text"><%= event.desciption %></p>
+            <p class="card-text"><small class="text-muted"><%= event.start_date %></small></p>
+            <%= link_to "Show Event", event ,class: "btn btn-dark"%>
+          </div>
+        </div>
+      </div>
+    </div>
+      <p>
+        <%= link_to "Show this event", event %>
+      </p>
+    <% end %>
+  </div>
+
+  <%= link_to "New event", new_event_path %>
+</div>
