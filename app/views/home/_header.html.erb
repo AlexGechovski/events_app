@@ -13,15 +13,19 @@
         <li class="nav-item">
           <%= link_to("About", home_about_path,class: "nav-link") %>
         </li>
-        <li class="nav-item">
-          <%= link_to("Sign Up", new_user_registration_path,class: "nav-link") %>
-        </li>
-        <li class="nav-item">
-          <%= link_to("Sign In", new_user_session_path,class: "nav-link") %>
-        </li>
-        <li class="nav-item">
-          <%= link_to("Log Out",destroy_user_session_path, method: :delete ,class: "nav-link") %>
-        </li>
+        <%if user_signed_in?%>
+          <li class="nav-item">
+            <%= button_to("Log Out",destroy_user_session_path, method: :delete,class: "btn btn-dark") %>
+          </li>
+        <%else%>
+          <li class="nav-item">
+            <%= link_to("Sign Up", new_user_registration_path,class: "nav-link") %>
+          </li>
+          <li class="nav-item">
+            <%= link_to("Sign In", new_user_session_path,class: "nav-link") %>
+          </li>
+        <%end%>
+        
       
       </ul>
       <form class="d-flex" role="search">
