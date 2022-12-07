@@ -11,6 +11,10 @@ Things you may want to cover:
 
 * Configuration
 
+bundle install
+rails bin/rails db:migrate 
+rails server
+
 * Database creation
 
 * Database initialization
