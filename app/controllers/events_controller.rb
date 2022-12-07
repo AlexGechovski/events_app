@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_event, only: %i[ show edit update destroy ]
 
   # GET /events or /events.json
@@ -22,7 +23,7 @@ class EventsController < ApplicationController
   # POST /events or /events.json
   def create
     @event = Event.new(event_params)
-
+    @event.user_id = current_user.id
     respond_to do |format|
       if @event.save
         format.html { redirect_to event_url(@event), notice: "Event was successfully created." }
