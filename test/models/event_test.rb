@@ -1,67 +1,59 @@
 require "test_helper"
 
 class EventTest < ActiveSupport::TestCase
-  test "Should not save event without title" do
-    event = Event.new(title: "",
-      location: "Sofia,Bulgaria",
-      start_date: "2022-12-03 22:08:00 UTC",
-      end_date: "2022-12-03 22:08:00 UTC")
-    assert_not event.valid?
+  test "title should be present" do
+    event = Event.new(title: "", description: "Description", location: "Location", start_date: DateTime.now, end_date: DateTime.now + 1.day, user: users(:one))
+    assert_not event.valid?, "Title is blank"
+    event.title = "Title"
+    assert event.valid?, "Title is present"
   end
-  test "Title shouldn't be less than 4 characters" do
-    event = Event.new(title: "Opa",
-      location: "Sofia,Bulgaria",
-      start_date: "2022-12-03 22:08:00 UTC",
-      end_date: "2022-12-03 22:08:00 UTC")
-    assert_not event.valid?
+
+  test "title should be at least 4 characters" do
+    event = Event.new(title: "abc", description: "Description", location: "Location", start_date: DateTime.now, end_date: DateTime.now + 1.day, user: users(:one))
+    assert_not event.valid?, "Title is too short"
+    event.title = "abcd"
+    assert event.valid?, "Title is long enough"
   end
-  test "Title shouldn't be more than 150 characters" do
-    event = Event.new(title: "ycqzuuzutidbzchpfaacophtwpeubuzphzaeemksvwybhcvltukiscofijdouwdkddnrekaupyjrhvhrertcfvmmqbfskkpomumfhqgclaeewqlwioapkoujjhfrkooaphhpobrlkmlhqhpjpgfinlz",
-      location: "Sofia,Bulgaria",
-      start_date: "2022-12-03 22:08:00 UTC",
-      end_date: "2022-12-03 22:08:00 UTC")
-    assert_not event.valid?
+
+  test "title should be no more than 150 characters" do
+    event = Event.new(title: "a" * 151, description: "Description", location: "Location", start_date: DateTime.now, end_date: DateTime.now + 1.day, user: users(:one))
+    assert_not event.valid?, "Title is too long"
+    event.title = "a" * 150
+    assert event.valid?, "Title is the right length"
   end
-  test "Should save event with title" do
-    event = Event.new(title: "Test Event",
-      location: "Sofia,Bulgaria",
-      start_date: "2022-12-03 22:08:00 UTC",
-      end_date: "2022-12-03 22:08:00 UTC")
-    assert event.valid?
+  test "location should be present" do
+    event = Event.new(title: "Title", description: "Description", location: "", start_date: DateTime.now, end_date: DateTime.now + 1.day, user: users(:one))
+    assert_not event.valid?, "Location is blank"
+    event.location = "Location"
+    assert event.valid?, "Location is present"
   end
-  test "Should not save event without start date" do
-    event = Event.new(title: "Test Event",
-      location: "Sofia,Bulgaria",
-      start_date: "",
-      end_date: "2022-12-03 22:08:00 UTC")
-    assert_not event.valid?
+
+  test "location should be at least 6 characters" do
+    event = Event.new(title: "Title", description: "Description", location: "abcde", start_date: DateTime.now, end_date: DateTime.now + 1.day, user: users(:one))
+    assert_not event.valid?, "Location is too short"
+    event.location = "abcdef"
+    assert event.valid?, "Location is long enough"
   end
-  test "Should not save event without end date" do
-    event = Event.new(title: "Test Event",
-      location: "Sofia,Bulgaria",
-      start_date: "2022-12-03 22:08:00 UTC",
-      end_date: "")
-    assert_not event.valid?
+
+  test "location should be no more than 150 characters" do
+    event = Event.new(title: "Title", description: "Description", location: "a" * 151, start_date: DateTime.now, end_date: DateTime.now + 1.day, user: users(:one))
+    assert_not event.valid?, "Location is too long"
+    event.location = "a" * 150
+    assert event.valid?, "Location is the right length"
   end
-  test "Start date shouldn't be after end date" do
-    event = Event.new(title: "Test Event",
-      location: "Sofia,Bulgaria",
-      start_date: "2022-12-03 22:08:00 UTC",
-      end_date: "2022-12-02 22:08:00 UTC")
-    assert_not event.valid?
+
+  test "start_date should be present" do
+    event = Event.new(title: "Title", description: "Description", location: "Location", start_date: nil, end_date: DateTime.now + 1.day, user: users(:one))
+    assert_not event.valid?, "Start date is blank"
+    event.start_date = DateTime.now
+    assert event.valid?, "Start date is present"
   end
-  test "Shouldn't save without location" do
-    event = Event.new(title: "Test Event",
-      location: "",
-      start_date: "2022-12-03 22:08:00 UTC",
-      end_date: "2022-12-02 22:08:00 UTC")
-    assert_not event.valid?
-  end
-  test "Location shouldn't be less than 6 characters" do
-    event = Event.new(title: "Test Event",
-      location: "Sofia",
-      start_date: "2022-12-03 22:08:00 UTC",
-      end_date: "2022-12-02 22:08:00 UTC")
-    assert_not event.valid?
+  test "end_date should be greater than or equal to start_date" do
+    event = Event.new(title: "Title", description: "Description", location: "Location", start_date: DateTime.now, end_date: DateTime.now - 1.day, user: users(:one))
+    assert_not event.valid?, "End date is before start date"
+    event.end_date = DateTime.now
+    assert event.valid?, "End date is same as start date"
+    event.end_date = DateTime.now + 1.day
+    assert event.valid?, "End date is after start date"
   end
 end

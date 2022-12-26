@@ -1,15 +1,41 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# test/fixtures/events.yml
 
 one:
-  title: MyString
-  desciption: MyText
-  location: MyText
-  start_date: 2022-11-29 21:35:41
-  end_date: 2022-11-29 21:35:41
+  title: Event 1
+  description: This is event 1
+  location: Location 1
+  start_date: 2022-12-24 10:00:00
+  end_date: 2022-12-24 12:00:00
+  user: one
 
 two:
-  title: MyString
-  desciption: MyText
-  location: MyText
-  start_date: 2022-11-29 21:35:41
-  end_date: 2022-11-29 21:35:41
+  title: Event 2
+  description: This is event 2
+  location: Location 2
+  start_date: 2022-12-25 10:00:00
+  end_date: 2022-12-25 12:00:00
+  user: two
+
+three:
+  title: Event 3
+  description: This is event 3
+  location: Location 3
+  start_date: 2022-12-26 10:00:00
+  end_date: 2022-12-26 12:00:00
+  user: three
+
+four:
+  title: Event 4
+  description: This is event 4
+  location: Location 4
+  start_date: 2022-12-27 10:00:00
+  end_date: 2022-12-27 12:00:00
+  user: four
+
+five:
+  title: Event 5
+  description: This is event 5
+  location: Location 5
+  start_date: 2022-12-28 10:00:00
+  end_date: 2022-12-28 12:00:00
+  user: five
