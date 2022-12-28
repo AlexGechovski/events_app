@@ -1,5 +1,5 @@
 <% @users.each do |user| %>
-  <%= link_to(current_user.email, user_path(user)) %> |
+  <%= link_to(user.email, user_path(user)) %> |
   <%= user.id %> |
   <%= user.admin %><br/>
   

@@ -5,6 +5,7 @@ class Ability
 
   def initialize(user)
     can :read, Event
+    can :read, User
     
     return unless user.present?
     can :manage, Event, user_id: user.id

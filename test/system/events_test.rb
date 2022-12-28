@@ -18,9 +18,6 @@ class EventsTest < ApplicationSystemTestCase
     fill_in "Password", with: "password"
     click_on "Log in"
 
-    # Verify that the user is logged in
-    assert_text "Signed in successfully."
-
     # User should be able to create, edit, and delete their own events
     visit events_url
     click_on "New event"
@@ -65,5 +62,13 @@ class EventsTest < ApplicationSystemTestCase
     visit event_url(@event)
     click_on "Destroy this event"
     assert_text "Event was successfully destroyed"
-  end               
+  end
+
+  test "users can perform certain actions" do
+    # Check that the user is able to perform certain actions
+    assert user.can?(:manage, event)
+    assert user.can?(:read, Event)
+    assert_not user.can?(:destroy, Event)
+  end
+
 end
