@@ -6,8 +6,7 @@
   <% @comments.each do |comment| %>
     <%= render comment %>
     <p>
-      <%event_id = params[:event_id]%>
-      <%= link_to "Show this comment", event_comment_url(event_id) %>
+      <%= link_to "Show this comment", event_comment_path(params[:event_id]) %>
     </p>
   <% end %>
 </div>
