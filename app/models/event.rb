@@ -4,5 +4,6 @@ class Event < ApplicationRecord
     validates :start_date , presence: true 
     validates :end_date , presence: true ,comparison: { greater_than_or_equal_to: :start_date }
 
+    has_and_belongs_to_many :comments
     belongs_to :user
 end
