@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   
   get 'users/index'
   devise_for :users
-  resources :events do 
-    resources :comments
-  end
+  resources :events 
+  resources :comments
+
 
   get 'home/about'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

@@ -13,6 +13,8 @@ class CommentsController < ApplicationController
   # GET /comments/new
   def new
     @comment = Comment.new
+    @comment.user = current_user
+    @comment.event = Event.first
   end
 
   # GET /comments/1/edit
@@ -25,7 +27,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to event_comment_url(@comment), notice: "Comment was successfully created." }
+        format.html { redirect_to comment_url(@comment), notice: "Comment was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -36,7 +38,7 @@ class CommentsController < ApplicationController
   def update
     respond_to do |format|
       if @comment.update(comment_params)
-        format.html { redirect_to event_comment_url(@comment), notice: "Comment was successfully updated." }
+        format.html { redirect_to comment_url(@comment), notice: "Comment was successfully updated." }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -48,7 +50,7 @@ class CommentsController < ApplicationController
     @comment.destroy
 
     respond_to do |format|
-      format.html { redirect_to event_comments_url, notice: "Comment was successfully destroyed." }
+      format.html { redirect_to comment_url, notice: "Comment was successfully destroyed." }
     end
   end
 
@@ -60,6 +62,6 @@ class CommentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def comment_params
-      params.require(:comment).permit(:text, :user_id)
+      params.require(:comment).permit(:text, :user_id , :event_id)
     end
 end
