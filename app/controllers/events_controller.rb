@@ -63,7 +63,7 @@ class EventsController < ApplicationController
       params.require(:event).permit(:title, :description, :location, :start_date, :end_date)
     end
 
-    def current_abillity
-      EventAbillity.new(current_user)
+    def current_ability
+      @current_ability ||= EventAbillity.new(current_user)
     end
 end

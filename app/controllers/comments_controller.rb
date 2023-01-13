@@ -1,9 +1,10 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: %i[ show edit update destroy ]
+  load_and_authorize_resource
+  # before_action :set_comment, only: %i[ show edit update destroy ]
 
   # GET /comments or /comments.json
   def index
-    @comments = Comment.all
+    # @comments = Comment.all
   end
 
   # GET /comments/1 or /comments/1.json
@@ -12,7 +13,7 @@ class CommentsController < ApplicationController
 
   # GET /comments/new
   def new
-    @comment = Comment.new
+    # @comment = Comment.new
     @comment.user = current_user
     @comment.event = Event.first
   end
@@ -23,7 +24,7 @@ class CommentsController < ApplicationController
 
   # POST /comments or /comments.json
   def create
-    @comment = Comment.new(comment_params)
+    # @comment = Comment.new(comment_params)
 
     respond_to do |format|
       if @comment.save
@@ -47,7 +48,7 @@ class CommentsController < ApplicationController
 
   # DELETE /comments/1 or /comments/1.json
   def destroy
-    @comment.destroy
+    # @comment.destroy
 
     respond_to do |format|
       format.html { redirect_to comment_url, notice: "Comment was successfully destroyed." }
@@ -55,13 +56,11 @@ class CommentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_comment
-      @comment = Comment.find(params[:id])
-    end
-
-    # Only allow a list of trusted parameters through.
     def comment_params
       params.require(:comment).permit(:text, :user_id , :event_id)
+    end
+    
+    def current_ability
+      @current_ability ||= CommentAbillity.new(current_user)
     end
 end
