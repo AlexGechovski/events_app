@@ -9,3 +9,7 @@
   <% end %>
   <%= link_to "Back to events", events_path %>
 </div>
+
+<%= render partial: "comments/comment", collection: @event.comments %>
+
+<%= render partial: "comments/form", locals: {comment: Comment.new(event_id: @event.id)} %>

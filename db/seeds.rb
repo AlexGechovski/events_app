@@ -6,7 +6,7 @@ admin = User.create!(email: "admin@example.com", password: "password", admin: tr
 
 # Create some additional users
 10.times do |i|
-    User.create!(email: "user#{i}@example.com", password: "password")
+    User.create!(email: "user#{i}@example.com", password: "password", name: "Ivan Ivanov")
 end
 # Create some events
 users = User.all
@@ -17,7 +17,6 @@ end
 events = Event.all
 events.each do |event|
   3.times do
-    com1 = Comment.create!(text: "This is a comment for event #{event.id}", user_id: User.all.sample)
-    event.comments << com1
+    Comment.create!(text: "This is a comment for event #{event.id}", user: User.all.sample , event: event)
   end
 end

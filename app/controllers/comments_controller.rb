@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
   # GET /comments/new
   def new
     # @comment = Comment.new
-    @comment.user = current_user
+
     @comment.event = Event.first
   end
 
@@ -25,7 +25,7 @@ class CommentsController < ApplicationController
   # POST /comments or /comments.json
   def create
     # @comment = Comment.new(comment_params)
-
+    @comment.user = current_user
     respond_to do |format|
       if @comment.save
         format.html { redirect_to comment_url(@comment), notice: "Comment was successfully created." }
@@ -59,7 +59,7 @@ class CommentsController < ApplicationController
     def comment_params
       params.require(:comment).permit(:text, :user_id , :event_id)
     end
-    
+
     def current_ability
       @current_ability ||= CommentAbillity.new(current_user)
     end
