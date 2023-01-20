@@ -2,7 +2,7 @@ Event.delete_all
 User.delete_all
 
 # Create a default user
-admin = User.create!(email: "admin@example.com", password: "password", admin: true)
+admin = User.create!(email: "admin@example.com", password: "password", admin: true, name: "Admin Admin")
 
 # Create some additional users
 10.times do |i|

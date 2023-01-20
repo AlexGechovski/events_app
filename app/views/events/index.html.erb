@@ -16,7 +16,7 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
-        <td><%= link_to event.title, event_path(event) %></td>
+        <td><%= link_to event.title, event_url(event) %></td>
         <td><%= event.description %></td>
         <td><%= event.location %></td>
         <td><%= event.start_date %></td>

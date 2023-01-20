@@ -1,4 +1,3 @@
-<p style="color: green"><%= notice %></p>
 
 <%= render @event %>
 
@@ -10,6 +9,9 @@
   <%= link_to "Back to events", events_path %>
 </div>
 
-<%= render partial: "comments/comment", collection: @event.comments %>
+<%= turbo_stream_from "comments" %>
+<%= turbo_frame_tag "comments" do %>
+  <%= render partial: "comments/comment", collection: @event.comments %>
+<% end %>
 
 <%= render partial: "comments/form", locals: {comment: Comment.new(event_id: @event.id)} %>

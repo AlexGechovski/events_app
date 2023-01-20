@@ -28,7 +28,11 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to comment_url(@comment), notice: "Comment was successfully created." }
+        # render turbo_stream: [
+        #   turbo_stream.prepend("comments", @comment)
+        # ]
+        
+        format.html { redirect_to event_url(@comment.event_id), notice: "Comment was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -39,7 +43,7 @@ class CommentsController < ApplicationController
   def update
     respond_to do |format|
       if @comment.update(comment_params)
-        format.html { redirect_to comment_url(@comment), notice: "Comment was successfully updated." }
+        format.html { redirect_to event_url(@comment.event_id), notice: "Comment was successfully updated." }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
