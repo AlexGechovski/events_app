@@ -64,6 +64,6 @@ class EventsController < ApplicationController
     end
 
     def current_ability
-      @current_ability ||= EventAbillity.new(current_user)
+      @current_ability ||= EventAbility.new(current_user)
     end
 end

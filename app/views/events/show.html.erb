@@ -2,7 +2,7 @@
 <%= render @event %>
 
 <div>
-  <% if can? :manage, @event%>
+  <% if can? :update, @event%>
     <%= link_to "Edit this event", edit_event_path(@event)%>
     <%= button_to "Destroy this event", @event, method: :delete %>
   <% end %>

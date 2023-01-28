@@ -1,4 +1,4 @@
-class EventAbillity
+class EventAbility
     include CanCan::Ability
   
     def initialize(user)
@@ -6,8 +6,8 @@ class EventAbillity
       return if user.nil?
       
       can :create , Event
-      can :edit , Event, user: user
+      can :update , Event, user: user
       can :destroy , Event, user: user
       
     end
-  end
+end

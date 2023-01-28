@@ -28,8 +28,11 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     respond_to do |format|
       if @comment.save
-        
+   
+        # format.html { redirect_to event_url(@comment.event_id), notice: "Comment was successfully created." }
+
         format.turbo_stream { render turbo_stream: turbo_stream.prepend("comments", @comment) }
+
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -49,10 +52,10 @@ class CommentsController < ApplicationController
 
   # DELETE /comments/1 or /comments/1.json
   def destroy
-    @comment.destroy
+     @comment.destroy
 
     respond_to do |format|
-      format.html { redirect_to comment_url, notice: "Comment was successfully destroyed." }
+      format.html { redirect_to event_url(@comment.event_id), notice: "Comment was successfully destroyed." }
     end
   end
 
@@ -62,6 +65,6 @@ class CommentsController < ApplicationController
     end
 
     def current_ability
-      @current_ability ||= CommentAbillity.new(current_user)
+      @current_ability ||= CommentAbility.new(current_user)
     end
 end

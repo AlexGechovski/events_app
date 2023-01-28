@@ -4,5 +4,10 @@
       <h5 class="card-title"><%= comment.user.name %></h5>
       <p class="card-text"><%= comment.text %></p>
     </div>
+
+  <% if comment.user_id == current_user.id %> 
+    <%= link_to "Edit this comment", edit_comment_path(comment.id) %>
+    <%= button_to "Destroy this comment", comment, method: :delete %>
+  <% end %>
   </div>
 </div>
