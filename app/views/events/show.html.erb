@@ -9,9 +9,10 @@
   <%= link_to "Back to events", events_path %>
 </div>
 
-<%= turbo_stream_from "comments" %>
-<%= turbo_frame_tag "comments" do %>
+<%= turbo_stream_from "comments_#{@event.id}" %>
+<%= turbo_frame_tag "comments_#{@event.id}" do %>
   <%= render partial: "comments/comment", collection: @event.comments %>
 <% end %>
 
 <%= render partial: "comments/form", locals: {comment: Comment.new(event_id: @event.id)} %>
+
