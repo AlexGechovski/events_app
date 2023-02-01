@@ -9,10 +9,17 @@
   <%= link_to "Back to events", events_path %>
 </div>
 
+
 <%= turbo_stream_from "comments_#{@event.id}" %>
 <%= turbo_frame_tag "comments_#{@event.id}" do %>
-  <%= render partial: "comments/comment", collection: @event.comments %>
+  <% @event.comments.each do |comment| %>
+    <% if current_user == comment.user %>
+      <%= render partial: "comments/comment_buttons", locals: { comment: comment, user: current_user } %>
+    <% else %>
+      <%= render partial: "comments/comment", locals: { comment: comment, user: current_user } %>
+    <% end %>
+  <% end %>
 <% end %>
 
-<%= render partial: "comments/form", locals: {comment: Comment.new(event_id: @event.id)} %>
 
+<%= render partial: "comments/form", locals: {comment: Comment.new(event_id: @event.id)} %>

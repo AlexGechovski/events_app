@@ -1,19 +1,6 @@
 class CommentsController < ApplicationController
   load_and_authorize_resource
 
-  # <% if user_signed_in? %>
-  #   <% if comment.user_id == current_user.id %> 
-  #     <%= link_to "Edit this comment", edit_comment_path(comment.id) %>
-  #     <%= button_to "Destroy this comment", comment, method: :delete %>
-  #   <% end %>
-  # <% end %>
-
-  
-  # <% if can? :delete, Comment %> 
-  #   <%= link_to "Edit this comment", edit_comment_path(comment.id) %>
-  #   <%= button_to "Destroy this comment", comment, method: :delete %>
-  # <% end %>
-
   # before_action :set_comment, only: %i[ show edit update destroy ]
 
   # GET /comments or /comments.json
