@@ -3,27 +3,17 @@
 
   <h1>Events</h1>
 
-<table class="table table-striped table-bordered">
-  <thead>
-    <tr>
-      <th scope="col">Title</th>
-      <th scope="col">Description</th>
-      <th scope="col">Location</th>
-      <th scope="col">Start Date</th>
-      <th scope="col">End Date</th>
-    </tr>
-  </thead>
-  <tbody>
+  <%= form_with(url: events_path, method: "GET") do |form| %>
+    <%= form.label :query, "Search event:" %>
+    <%= form.text_field :query %>
+    <%= form.submit 'Search', name: nil %>
+  <% end %><br>
+
+  <%= turbo_frame_tag "events" do %>
     <% @events.each do |event| %>
-      <tr>
-        <td><%= link_to event.title, event_url(event) %></td>
-        <td><%= event.description %></td>
-        <td><%= event.location %></td>
-        <td><%= event.start_date %></td>
-        <td><%= event.end_date %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <%= render partial: "events/event", locals:{event: event} %>
+  <% end %>
+
+  <% end %>
 
 <%= link_to "New event", new_event_path %>

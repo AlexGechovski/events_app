@@ -21,6 +21,10 @@ class CommentsController < ApplicationController
 
   # GET /comments/1/edit
   def edit
+    # respond_to do |format|
+    #        format.turbo_stream { render turbo_stream: turbo_stream.prepend("comments", @comment) }
+
+    # end
   end
 
   # POST /comments or /comments.json
@@ -29,11 +33,8 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     respond_to do |format|
       if @comment.save
-   
         # format.html { redirect_to event_url(@comment.event_id), notice: "Comment was successfully created." }
-
         format.turbo_stream { render turbo_stream: turbo_stream.prepend("comments", @comment) }
-
       else
         format.html { render :new, status: :unprocessable_entity }
       end
