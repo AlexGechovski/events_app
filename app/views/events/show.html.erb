@@ -1,14 +1,24 @@
 
 <%= render @event %>
 
-<div>
-  <% if can? :update, @event%>
-    <%= link_to "Edit this event", edit_event_path(@event)%>
-    <%= button_to "Destroy this event", @event, method: :delete %>
-  <% end %>
-  <%= link_to "Back to events", events_path %>
-</div>
 
+<% if can? :update, @event%>
+  <%= link_to "Edit this event", edit_event_path(@event)%>
+  <%= button_to "Destroy this event", @event, method: :delete %>
+<% end %>
+<%= link_to "Back to events", events_path %>
+
+
+<% if @attendances != nil %>
+  <h2>Attendees:</h2>
+  <ul>
+    <% @attendances.each do |attendance| %>
+      <li>
+        <%= attendance.user.name %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
 
 <%= turbo_stream_from "comments_#{@event.id}" %>
 <%= turbo_frame_tag "comments_#{@event.id}" do %>
