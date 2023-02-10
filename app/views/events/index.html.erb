@@ -3,7 +3,7 @@
 
   <h1>Events</h1>
 
-  <%= form_with(url: events_path, method: "GET") do |form| %>
+  <%= form_with(url: events_path, method: "GET", data: { turbo_frame: "events" }) do |form| %>
     <%= form.label :query, "Search event:" %>
     <%= form.text_field :query %>
     <%= form.submit 'Search', name: nil %>

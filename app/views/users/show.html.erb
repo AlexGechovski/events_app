@@ -1,2 +1,7 @@
 <%= @user.email %> |
 <%= @user.admin %><br/>
+
+Owned events
+<% @events.each do |event| %>
+    <%= render partial: "events/event", locals:{event: event} %>
+<% end %>
