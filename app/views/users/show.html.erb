@@ -5,3 +5,11 @@ Owned events
 <% @events.each do |event| %>
     <%= render partial: "events/event", locals:{event: event} %>
 <% end %>
+
+Attended events
+<% if @attended_events != nil %>
+    <% @attended_events.each do |attendance| %>
+        <% event = Event.find(attendance.event_id) %>
+        <%= render partial: "events/event", locals:{event: event} %>
+    <% end %>
+<% end %>
