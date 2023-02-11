@@ -2,7 +2,7 @@ class EventAbility
     include CanCan::Ability
   
     def initialize(user)
-      can :read, Event
+      can [:show, :read], Event
       return if user.nil?
       
       can :create , Event

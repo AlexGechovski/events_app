@@ -45,6 +45,7 @@ class EventsController < ApplicationController
   # GET /events/1 or /events/1.json
   def show
     @attendances = Attendance.where(event_id: @event.id)
+    @attendance = Attendance.where(event_id: @event.id, user_id: current_user.id).first
   end
 
   # GET /events/new
