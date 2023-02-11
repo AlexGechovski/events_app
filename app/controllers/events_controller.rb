@@ -35,11 +35,11 @@ class EventsController < ApplicationController
     else
       @events = Event.all
     end
-    if turbo_frame_request?
-      render partial: "events ", locals: { events: @events  }
-    else
-      render "index"
-    end
+    # if turbo_frame_request?
+    #   render partial: "events/event", locals: { event: @events }
+    # else
+    #   render "index"
+    # end
   end
 
   # GET /events/1 or /events/1.json
