@@ -10,14 +10,16 @@
       <% end %>
       <%= link_to "Back to events", events_path %>
 
-      <% if @attendance == nil %>
-        <%= form_with(model: [Attendance.new], local: true) do |form| %>
-          <%= form.hidden_field :event_id, value: @event.id %>
-          <%= form.submit "Attend" %>
-        <% end %>
-      <% else %>
-        <%= form_with model: @attendance, method: :delete do |form| %>
-          <%= form.submit "Cancel Attendance" %>
+      <% if current_user != nil %>
+        <% if @attendance == nil %>
+          <%= form_with(model: [Attendance.new], local: true) do |form| %>
+            <%= form.hidden_field :event_id, value: @event.id %>
+            <%= form.submit "Attend" %>
+          <% end %>
+        <% else %>
+          <%= form_with model: @attendance, method: :delete do |form| %>
+            <%= form.submit "Cancel Attendance" %>
+          <% end %>
         <% end %>
       <% end %>
       

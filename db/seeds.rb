@@ -1,22 +1,50 @@
-Event.delete_all
-User.delete_all
+require 'faker'
 
-# Create a default user
-admin = User.create!(email: "admin@example.com", password: "password", admin: true, name: "Admin Admin")
+sample_images = [  "sample1.jpg",  "sample2.jpg",  "sample3.jpg"]
 
-# Create some additional users
-10.times do |i|
-    User.create!(email: "user#{i}@example.com", password: "password", name: "Ivan Ivanov")
+# Create Users
+15.times do
+  User.create!(
+    name: Faker::Name.name,
+    email: Faker::Internet.email,
+    password: "password"
+  )
 end
-# Create some events
+
 users = User.all
-1.upto(10) do |i|
-    Event.create!(title: "Event #{i}", description: "This is event #{i}", location: "Location #{i}", start_date: DateTime.now, end_date: DateTime.now + 1.day, user: users.sample)
+# Create Events
+10.times do
+  event = Event.create!(
+    title: Faker::Book.title,
+    description: Faker::Lorem.paragraph,
+    location: Faker::Address.street_address,
+    start_date: DateTime.now,
+    end_date: DateTime.now + 1.day,
+    user: users.sample,
+  )
+  image_path = File.join(Rails.root, "app/assets/images/#{sample_images.sample}")
+  event.image.attach(io: File.open(image_path), filename: "sample_image.jpg")
 end
 
-events = Event.all
-events.each do |event|
-  3.times do
-    Comment.create!(text: "This is a comment for event #{event.id}", user: User.all.sample , event: event)
-  end
+# Create Attendances
+20.times do
+  Attendance.create!(
+    user_id: User.all.sample.id,
+    event_id: Event.all.sample.id
+  )
 end
+
+# Create Comments
+50.times do
+  Comment.create!(
+    text: Faker::Lorem.sentence,
+    user_id: User.all.sample.id,
+    event_id: Event.all.sample.id
+  )
+end
+
+10.times do |i|
+  User.create!(email: "user#{i}@example.com", password: "password", name: "Ivan Ivanov")
+end
+
+puts "Seed finished"
