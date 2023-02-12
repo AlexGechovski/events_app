@@ -1,19 +1,21 @@
-<div id="<%= dom_id event %>" class="card text-bg-secondary mb-3" style="max-width: 20rem;">
-  <div class="row g-0">
-    <div class="col-md-4">
-    <!-- <img src="..." class="img-fluid rounded-start" alt="..."> -->
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title"><%= event.title %></h5>
-        <p class="card-text"><%= User.find(event.user_id).name %></p>
-        <%= link_to(User.find(event.user_id).name, user_path(event.user_id)) %>
-        <p class="card-text"><%= event.id %></p>
-        <p class="card-text"><%= event.location %></p>
-        <p class="card-text"><%= event.description %></p>
-        <p class="card-text"><%= event.start_date %></p>
-        <%= link_to "Show", event_path(event) ,class: "btn btn-dark"%>
-      </div>
-    </div>
+
+<div id="<%= dom_id event %>" class="card" style="width: 18rem;">
+  <% if event.image.attached? %>
+    <%= image_tag(event.image) %>
+  <% end %>
+  <div class="card-body">
+    <h5 class="card-title"><%= event.title %></h5>
+    <p class="card-text"><%= event.description %></p>
+    <p class="card-text"><%= event.location %></p>
+    <p class="card-text"><%= event.start_date %></p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <%= link_to(User.find(event.user_id).name, user_path(event.user_id)) %>
+    <li class="list-group-item">A second item</li>
+    <li class="list-group-item">A third item</li>
+  </ul>
+  <div class="card-body">
+    <%= link_to "Show", event_path(event) ,class: "btn btn-dark"%>
+    <a href="#" class="card-link">Another link</a>
   </div>
 </div>
