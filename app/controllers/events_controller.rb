@@ -4,11 +4,11 @@ class EventsController < ApplicationController
 
   # GET /events or /events.json
   def index
-    # @events = Event.all
+    
     if params[:query].present?
-      @events = Event.where("title LIKE ?", "%#{params[:query]}%")
+      @pagy, @events = pagy(Event.where("title LIKE ?", "%#{params[:query]}%"), items: 6)
     else
-      @events = Event.all
+      @pagy, @events = pagy(Event.all, items: 6)
     end
   end
 

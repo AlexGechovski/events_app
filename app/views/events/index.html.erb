@@ -3,17 +3,27 @@
 
   <h1>Events</h1>
 
+  <%= link_to "New event", new_event_path %>
   <%= form_with(url: events_path, method: "GET", data: { turbo_frame: "events" }) do |form| %>
     <%= form.label :query, "Search event:" %>
     <%= form.text_field :query %>
     <%= form.submit 'Search', name: nil %>
   <% end %><br>
 
-  <%= turbo_frame_tag "events" do %>
-    <% @events.each do |event| %>
-      <%= render partial: "events/event", locals:{event: event} %>
+<%= turbo_frame_tag "events" do %>
+  <div class="row mb-5">
+    <% @events.each_slice(3) do |row| %>
+      <% row.each do |event| %>
+        <div class="col-4">
+          <%= render partial: "events/event", locals: { event: event } %>
+        </div>
+      <% end %>
+      <% break if (row.length < 3) %>
+    </div>
+    <div class="row mb-5">
   <% end %>
+<% end %>
+  
+  <%== pagy_nav(@pagy, theme: 'bootstrap') %>
 
-  <% end %>
 
-<%= link_to "New event", new_event_path %>
