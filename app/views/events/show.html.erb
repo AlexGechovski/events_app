@@ -1,34 +1,18 @@
-<div class="container text-center">
+<div class="container">
   <div class="row align-items-start">
     <div class="col">
-      One of three columns
       <%= render @event %>
 
       <% if can? :update, @event%>
         <%= link_to "Edit this event", edit_event_path(@event)%>
         <%= button_to "Destroy this event", @event, method: :delete %>
       <% end %>
-      <%= link_to "Back to events", events_path %>
-
-      <% if current_user != nil %>
-        <% if @attendance == nil %>
-          <%= form_with(model: [Attendance.new], local: true) do |form| %>
-            <%= form.hidden_field :event_id, value: @event.id %>
-            <%= form.submit "Attend" %>
-          <% end %>
-        <% else %>
-          <%= form_with model: @attendance, method: :delete do |form| %>
-            <%= form.submit "Cancel Attendance" %>
-          <% end %>
-        <% end %>
-      <% end %>
-      
-    </div>
-    <div class="col">
-      One of three columns
       <h5>Add a comment</h5>
       <%= render partial: "comments/form", locals: {comment: Comment.new(event_id: @event.id)} %>
-    
+      <%= link_to "Back to events", events_path %>
+    </div>
+    <div class="col">
+    <h2>Comments:</h2>
       <%= turbo_stream_from "comments_#{@event.id}" %>
       <%= turbo_frame_tag "comments_#{@event.id}" do %>
         <% @event.comments.each do |comment| %>
@@ -41,9 +25,8 @@
       <% end %>
     </div>
     <div class="col">
-      One of three columns    
       <% if @attendances != nil %>
-        <h2>Attendees:</h2>
+        <h2>Attending:</h2>
         <ul>
           <% @attendances.each do |attendance| %>
             <li>

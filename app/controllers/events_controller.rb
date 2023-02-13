@@ -4,7 +4,10 @@ class EventsController < ApplicationController
 
   # GET /events or /events.json
   def index
-    
+    if current_user != nil
+      @attendances = Attendance.where(user_id: current_user.id)
+    end
+
     if params[:query].present?
       @pagy, @events = pagy(Event.where("title LIKE ?", "%#{params[:query]}%"), items: 6)
     else

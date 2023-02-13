@@ -26,14 +26,6 @@ users = User.all
   event.image.attach(io: File.open(image_path), filename: "sample_image.jpg")
 end
 
-# Create Attendances
-20.times do
-  Attendance.create!(
-    user_id: User.all.sample.id,
-    event_id: Event.all.sample.id
-  )
-end
-
 # Create Comments
 50.times do
   Comment.create!(
@@ -43,8 +35,16 @@ end
   )
 end
 
-10.times do |i|
-  User.create!(email: "user#{i}@example.com", password: "password", name: "Ivan Ivanov")
+# Create Attendances
+20.times do
+  Attendance.create!(
+    user_id: User.all.sample.id,
+    event_id: Event.all.sample.id
+  )
 end
+
+# 10.times do |i|
+#   User.create!(email: "user#{i}@example.com", password: "password", name: "Ivan Ivanov")
+# end
 
 puts "Seed finished"

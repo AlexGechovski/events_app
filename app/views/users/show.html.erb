@@ -1,15 +1,30 @@
-<%= @user.email %> |
-<%= @user.admin %><br/>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-4">
+    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" style="width:200px; height:200px;" alt="Example Image"><br/>
+      <strong><%= @user.name %></strong><br />
+      <%= @user.email %> <br />
+      Is user admin: <%= @user.admin %><br />
+    </div>
+    <div class="col-4">
+      <strong>Owned events</strong>
+      <% @events.each do |event| %>
+        <div class="col-4">
+          <%= render partial: "events/event", locals: { event: event } %>
+        </div>
+      <% end %>
+    </div>
 
-Owned events
-<% @events.each do |event| %>
-    <%= render partial: "events/event", locals:{event: event} %>
-<% end %>
-
-Attended events
-<% if @attended_events != nil %>
-    <% @attended_events.each do |attendance| %>
-        <% event = Event.find(attendance.event_id) %>
-        <%= render partial: "events/event", locals:{event: event} %>
-    <% end %>
-<% end %>
+    <div class="col-4">
+      <strong>Attended events</strong>
+      <% if @attended_events != nil %>
+        <% @attended_events.each do |attendance| %>
+          <% event = Event.find(attendance.event_id) %>
+          <div class="col-4">
+            <%= render partial: "events/event", locals: { event: event } %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
