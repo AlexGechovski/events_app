@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   load_and_authorize_resource
   # before_action :set_event, only: %i[ show edit update destroy ]
 
-  # GET /events or /events.json
+  # GET /events
   def index
     if current_user != nil
       @attendances = Attendance.where(user_id: current_user.id)
@@ -15,7 +15,7 @@ class EventsController < ApplicationController
     end
   end
 
-  # GET /events/1 or /events/1.json
+  # GET /events/1
   def show
     @attendances = Attendance.where(event_id: @event.id)
     if current_user != nil
@@ -32,7 +32,7 @@ class EventsController < ApplicationController
   def edit
   end
 
-  # POST /events or /events.json
+  # POST /events
   def create
     # @event = Event.new(event_params)
     @event.user_id = current_user.id
@@ -45,7 +45,7 @@ class EventsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /events/1 or /events/1.json
+  # PATCH/PUT /events/1
   def update
     respond_to do |format|
       if @event.update(event_params)
@@ -56,7 +56,7 @@ class EventsController < ApplicationController
     end
   end
 
-  # DELETE /events/1 or /events/1.json
+  # DELETE /events/1
   def destroy
     @event.destroy
     respond_to do |format|
@@ -65,11 +65,6 @@ class EventsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    # def set_event
-    #   # @event = Event.find(params[:id])
-    # end
-
     # Only allow a list of trusted parameters through.
     def event_params
       params.require(:event).permit(:title, :description, :location, :start_date, :end_date, :image)

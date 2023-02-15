@@ -6,7 +6,6 @@ class Event < ApplicationRecord
 
     has_many :comments, dependent: :destroy
     belongs_to :user
-    has_one_attached :image , dependent: :destroy
     has_many :attendances, dependent: :destroy
-
+    has_one_attached :image , dependent: :destroy
 end

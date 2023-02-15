@@ -11,7 +11,7 @@
   <% end %><br>
 
 <%= turbo_frame_tag "events" do %>
-  <div class="row mb-5">
+  <div class="row mb-2">
     <% @events.each_slice(3) do |row| %>
       <% row.each do |event| %>
         <div class="col-4">
@@ -20,7 +20,7 @@
       <% end %>
       <% break if (row.length < 3) %>
     </div>
-    <div class="row mb-5">
+    <div class="row mb-2">
   <% end %>
 <% end %>
 

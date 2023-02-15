@@ -1,14 +1,13 @@
 class CommentsController < ApplicationController
   load_and_authorize_resource
 
-  # before_action :set_comment, only: %i[ show edit update destroy ]
-
-  # GET /comments or /comments.json
+  # GET /comments
   def index
     # @comments = Comment.all
   end
 
-  # GET /comments/1 or /comments/1.json
+  # GET /comments/1
+  on
   def show
   end
 
@@ -27,7 +26,7 @@ class CommentsController < ApplicationController
     # end
   end
 
-  # POST /comments or /comments.json
+  # POST /comments
   def create
     # @comment = Comment.new(comment_params)
     @comment.user = current_user
@@ -41,7 +40,8 @@ class CommentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /comments/1 or /comments/1.json
+  # PATCH/PUT /comments/1
+  on
   def update
     respond_to do |format|
       if @comment.update(comment_params)
@@ -52,7 +52,8 @@ class CommentsController < ApplicationController
     end
   end
 
-  # DELETE /comments/1 or /comments/1.json
+  # DELETE /comments/1
+  on
   def destroy
      @comment.destroy
 
