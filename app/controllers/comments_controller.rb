@@ -7,7 +7,6 @@ class CommentsController < ApplicationController
   end
 
   # GET /comments/1
-  on
   def show
   end
 
@@ -41,7 +40,6 @@ class CommentsController < ApplicationController
   end
 
   # PATCH/PUT /comments/1
-  on
   def update
     respond_to do |format|
       if @comment.update(comment_params)
@@ -53,7 +51,6 @@ class CommentsController < ApplicationController
   end
 
   # DELETE /comments/1
-  on
   def destroy
      @comment.destroy
 
