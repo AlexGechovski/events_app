@@ -21,6 +21,7 @@ class EventTest < ActiveSupport::TestCase
     event.title = "a" * 150
     assert event.valid?, "Title is the right length"
   end
+
   test "location should be present" do
     event = Event.new(title: "Title", description: "Description", location: "", start_date: DateTime.now, end_date: DateTime.now + 1.day, user: users(:one))
     assert_not event.valid?, "Location is blank"
