@@ -4,7 +4,9 @@
       <h5 class="card-title"><%= comment.user.name %></h5>
       <p class="card-text"><%= comment.text %></p>
     </div>
-    <%= link_to "Edit this comment", edit_comment_path(comment.id) %>
-    <%= button_to "Destroy this comment", comment, method: :delete %>
+  <div class="d-inline">
+    <%= link_to "Edit", edit_comment_path(comment.id), class: "btn btn-primary" %>
+    <%= button_to "Destroy", comment, method: :delete, class: "btn btn-danger" %>
+  </div>
   </div>
 <% end %>

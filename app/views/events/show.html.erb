@@ -3,12 +3,8 @@
     <div class="col">
       <%= render @event %>
 
-      <% if can? :update, @event%>
-        <%= link_to "Edit this event", edit_event_path(@event)%>
-        <%= button_to "Destroy this event", @event, method: :delete %>
-      <% end %>
       <% if user_signed_in? %>
-        <h5>Add a comment</h5>
+        <h5>Add a comment:</h5>
         <%= render partial: "comments/form", locals: {comment: Comment.new(event_id: @event.id)} %>
       <% end %>
       <%= link_to "Back to events", events_path %>

@@ -1,6 +1,6 @@
 <%= form_with(model: comment, html: { class: "form-inline" }) do |form| %>
   <% if comment.errors.any? %>
-    <div style="color: red">
+    <div class="alert alert-danger">
       <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
 
       <ul>
@@ -11,14 +11,14 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :text, style: "display: block" %>
-    <%= form.text_area :text %>
+  <div class="form-group">
+    <%= form.label :text %>
+    <%= form.text_area :text, class: "form-control" %>
   </div>
 
-  <%= form.hidden_field :event_id %>
+  <%= form.hidden_field :event_id %><br/>
 
-  <div>
-    <%= form.submit %>
+  <div class="form-group">
+    <%= form.submit "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>

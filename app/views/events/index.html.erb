@@ -1,14 +1,17 @@
 
-  <p style="color: green"><%= notice %></p>
+<p style="color: green"><%= notice %></p>
 
-  <h1>Events</h1>
+<h1>Events</h1>
 
-  <%= link_to "New event", new_event_path %>
-  <%= form_with(url: events_path, method: "GET", data: { turbo_frame: "events" }) do |form| %>
-    <%= form.label :query, "Search event:" %>
-    <%= form.text_field :query %>
-    <%= form.submit 'Search', name: nil %>
+<%= link_to "New event", new_event_path, class: "btn btn-secondary" %>
+
+<div class="d-flex flex-row justify-content-center align-items-center">
+  <%= form_with(url: events_path, method: "GET", data: { turbo_frame: "events" }, class: "d-flex align-items-center") do |form| %>
+    <%= form.label :query, "Search:", class: "me-3" %>
+    <%= form.text_field :query, class: "form-control me-3" %>
+    <%= form.submit 'Search', name: nil, class: "btn btn-primary" %>
   <% end %><br>
+</div>
 
 <%= turbo_frame_tag "events" do %>
   <div class="row mb-2">

@@ -1,6 +1,6 @@
-<%= form_with(model: event) do |form| %>
+<%= form_with(model: event, class: "form") do |form| %>
   <% if event.errors.any? %>
-    <div style="color: red">
+    <div class="alert alert-danger">
       <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
 
       <ul>
@@ -11,37 +11,37 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+  <div class="form-group">
+    <%= form.label :title, class: "form-label" %>
+    <%= form.text_field :title, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description %>
+  <div class="form-group">
+    <%= form.label :description, class: "form-label" %>
+    <%= form.text_area :description, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :location, style: "display: block" %>
-    <%= form.text_area :location %>
+  <div class="form-group">
+    <%= form.label :location, class: "form-label" %>
+    <%= form.text_area :location, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :start_date, style: "display: block" %>
-    <%= form.datetime_field :start_date %>
+  <div class="form-group">
+    <%= form.label :start_date, class: "form-label" %>
+    <%= form.datetime_field :start_date, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :end_date, style: "display: block" %>
-    <%= form.datetime_field :end_date %>
+  <div class="form-group">
+    <%= form.label :end_date, class: "form-label" %>
+    <%= form.datetime_field :end_date, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :image, style: "display: block" %>
-    <%= form.file_field :image %>
+  <div class="form-group">
+    <%= form.label :image, class: "form-label" %>
+    <%= form.file_field :image, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="form-group">
+    <%= form.submit "Save Event", class: "btn btn-primary" %>
   </div>
 <% end %>
