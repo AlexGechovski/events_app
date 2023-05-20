@@ -1,7 +1,40 @@
 <div class="container">
   <div class="row align-items-start">
     <div class="col">
-      <%= render @event %>
+      <div  class="card my-3" style="width: 18rem;">
+        <% if @event.image.attached? %>
+          <%= image_tag(@event.image, style: "border-radius: 5px;" ) %>
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title"><%= @event.title %></h5>
+          <p class="card-text"><%= @event.description %></p>
+          <p class="card-text"><%= @event.location %></p>
+          <p class="card-text"><%= @event.start_date %></p>
+          <%= link_to(User.find(@event.user_id).name, user_path(@event.user_id)) %>
+        </div>
+        <div class="card-body">
+          <%= link_to "Show", event_path(@event) ,class: "btn btn-primary" %>
+          <% if can? :update, @event%>
+            <%= link_to "Edit", edit_event_path(@event), class: "btn btn-dark" %>
+            <%= button_to "Destroy", @event, method: :delete, class: "btn btn-danger" %>
+          <% end %>
+          <%# if @attendances != nil %>
+            <%# @attendance = @attendances.where(event_id: @event.id).last %>
+          <%# end %>
+          <% if current_user != nil %>
+              <% if @attendance == nil %>
+                <%= form_with(model: [Attendance.new], local: true) do |form| %>
+                  <%= form.hidden_field :event_id, value: @event.id %>
+                  <%= form.submit "Attend", class: "btn btn-secondary" %>
+                <% end %>
+              <% else %>
+                <%= form_with model: @attendance, method: :delete do |form| %>
+                  <%= form.submit "Cancel Attendance", class: "btn btn-secondary" %>
+                <% end %>
+              <% end %>
+            <% end %>
+        </div>
+      </div>
 
       <% if user_signed_in? %>
         <h5>Add a comment:</h5>

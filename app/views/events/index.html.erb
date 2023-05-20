@@ -3,8 +3,9 @@
 
 <h1>Events</h1>
 
-<%= link_to "New event", new_event_path, class: "btn btn-secondary" %>
-
+<% if user_signed_in? %>
+  <%= link_to "New event", new_event_path, class: "btn btn-secondary" %>
+<% end %>
 <div class="d-flex flex-row justify-content-center align-items-center">
   <%= form_with(url: events_path, method: "GET", data: { turbo_frame: "events" }, class: "d-flex align-items-center") do |form| %>
     <%= form.label :query, "Search:", class: "me-3" %>

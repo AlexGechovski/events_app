@@ -1,6 +1,6 @@
 require 'faker'
 
-sample_images = [  "sample1.jpg",  "sample2.jpg",  "sample3.jpg"]
+sample_images = ["sample1.jpg",  "sample2.jpg",  "sample3.jpg"]
 
 # Create Users
 15.times do

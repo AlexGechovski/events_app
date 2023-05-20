@@ -1,9 +1,9 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  user: one
-  event: one
+# one:
+#   user: one
+#   event: one
 
-two:
-  user: two
-  event: two
+# two:
+#   user: two
+#   event: two

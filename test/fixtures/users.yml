@@ -1,24 +1,29 @@
 one:
+  name: User One
   email: user1@example.com
   encrypted_password: <%= User.new.send(:password_digest, 'password') %>
   admin: false
 
 two:
+  name: User Two
   email: user2@example.com
   encrypted_password: <%= User.new.send(:password_digest, 'password') %>
   admin: false
 
 three:
+  name: User Three
   email: user3@example.com
   encrypted_password: <%= User.new.send(:password_digest, 'password') %>
   admin: false
 
 four:
+  name: User Four
   email: user4@example.com
   encrypted_password: <%= User.new.send(:password_digest, 'password') %>
   admin: false
 
 five:
+  name: User Five
   email: user5@example.com
   encrypted_password: <%= User.new.send(:password_digest, 'password') %>
   admin: true

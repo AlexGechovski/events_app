@@ -16,7 +16,7 @@
     </div>
 
     <div class="col-4">
-      <strong>Attended events</strong>
+      <strong>Attending events</strong>
       <% if @attended_events != nil %>
         <% @attended_events.each do |attendance| %>
           <% event = Event.find(attendance.event_id) %>
