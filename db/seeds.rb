@@ -37,10 +37,12 @@ end
 
 # Create Attendances
 20.times do
-  Attendance.create!(
-    user_id: User.all.sample.id,
-    event_id: Event.all.sample.id
-  )
+  user_id = User.all.sample.id
+  event_id = Event.all.sample.id
+
+  Attendance.find_or_create_by(user_id: user_id, event_id: event_id) do |attendance|
+
+  end
 end
 
 # 10.times do |i|
